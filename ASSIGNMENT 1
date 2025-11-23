@@ -1,0 +1,109 @@
+Exercise 1: Arrays in Financial Analytics
+ 
+   import numpy as np
+transactions = np.array([
+    [1500, 1600, 1550, 1700, 1650, 1800],
+    [2500, 2450, 2600, 2550, 2700, 2650],
+    [900, 950, 920, 1000, 980, 1050],
+    [3200, 3150, 3300, 3250, 3400, 3350]
+])
+
+ * Calculate total transactions per branch:
+   total_per_branch = np.sum(transactions, axis=1)
+print("Total transactions per branch:", total_per_branch)
+
+ * Identify the branch with the highest total:
+   highest_branch_index = np.argmax(total_per_branch)
+print(f"Branch {highest_branch_index + 1} has the highest total transactions.")
+
+ * Compute average monthly volume:
+   average_monthly = np.mean(transactions)
+print("Average monthly transaction volume across all branches:", average_monthly)
+
+ * Reshape the array:
+   reshaped_array = transactions.reshape(3, 8)
+print("Reshaped array (3x8):\n", reshaped_array)
+
+   [cite_start]Implications: Reshaping a 4 \\times 6 array to a 3 \\times 8 changes the data structure without changing the total number of elements (24)[cite: 6]. [cite_start]This could be useful for a different type of analysis, like viewing data from 3 regions over 8 months instead of 4 branches over 6 months[cite: 6].
+Exercise 2: Lists in Logistics Management
+ * Create a list of routes:
+   [span_0](start_span)routes = ["Route A", "Route B", "Route C", "Route D", "Route E", "Route F", "Route G", "Route H", "Route I", "Route J"][span_0](end_span)
+
+ * Append and remove:
+   routes.append("New Route K")
+routes.remove("Route D")
+print("Updated routes:", routes)
+
+ * Sort and reverse:
+   routes.sort()
+print("Alphabetically sorted:", routes)
+routes.reverse()
+print("Reversed:", routes)
+
+ * Count routes starting with 'N':
+   n_routes_count = sum(1 for route in routes if route.startswith('N'))
+print(f"Number of routes starting with 'N': {n_routes_count}")
+
+ * List comprehension for routes over 10 characters:
+   long_routes = [route for route in routes if len(route) > 10]
+print("Routes longer than 10 characters:", long_routes)
+
+Exercise 3: Tuples in Medical Records
+ * Create a patient tuple:
+   [span_1](start_span)patient_vitals = ("John Doe", 45, "120/80", 72)[span_1](end_span)
+
+ * Access age and heart rate:
+   age = patient_vitals[1]
+heart_rate = patient_vitals[3]
+[span_2](start_span)print(f"Patient's age: {age}, Heart rate: {heart_rate}")[span_2](end_span)
+
+ * Why tuples are suitable:
+   [cite_start]Tuples are immutable, meaning their elements cannot be changed after creation[cite: 15]. [cite_start]This makes them ideal for storing patient vitals, which should not be accidentally altered[cite: 15]. [cite_start]It ensures the data record remains a consistent and reliable snapshot[cite: 15].
+ * Update heart rate:
+   vitals_list = list(patient_vitals)
+vitals_list[3] = 75
+patient_vitals_updated = tuple(vitals_list)
+print("Updated tuple:", patient_vitals_updated)
+
+ * Extract names from a tuple of patients:
+   patients_data = (
+    ("John Doe", 45, "120/80", 72),
+    ("Jane Smith", 30, "115/75", 68),
+    ("Peter Jones", 55, "135/85", 80),
+    ("Mary Brown", 25, "110/70", 65),
+    ("Sam White", 60, "140/90", 78)
+)
+names = [patient[0] for patient in patients_data]
+print("Patient names:", names)
+
+Exercise 4: Dictionaries in E-Commerce
+ * Create an inventory dictionary:
+   inventory = {
+    "Laptop": 25,
+    "Mouse": 50,
+    "Keyboard": 30,
+    "Monitor": 15,
+    "Webcam": 8
+[span_3](start_span)}[span_3](end_span)
+
+ * Add and update a product:
+   inventory["Headphones"] = 40
+inventory["Monitor"] = 12
+print("Updated inventory:", inventory)
+
+ * Function for low stock items:
+   def get_low_stock_products(inventory_dict):
+    return {product: stock for product, stock in inventory_dict.items() if stock < 10}
+low_stock_items = get_low_stock_products(inventory)
+print("Products with stock < 10:", low_stock_items)
+
+ * Delete a product:
+   del inventory["Webcam"]
+print("Inventory after deletion:", inventory)
+
+ * Loop through and print items:
+   print("Current inventory:")
+for product, quantity in inventory.items():
+    print(f"{product}: {quantity} in stock")
+
+
