@@ -1,0 +1,125 @@
+# Define a Node class for the linked list
+class StudentNode:
+    def __init__(self, name, admission, data=None):
+        self.name = name
+        self.admission = admission
+        self.data = data if data else {}
+        self.next = None
+    
+    def __repr__(self):
+        return f"{self.name}: {self.admission}"
+
+# Define the linked list class
+class StudentLinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def add_student(self, name, admission, marks_dict):
+        """Add a new student to the linked list"""
+        new_node = StudentNode(name, admission, marks_dict)
+        
+        if not self.head:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+    
+    def display_all_students(self):
+        """Display all students and their marks"""
+        if not self.head:
+            print("No students in the list!")
+            return
+        
+        current = self.head
+        while current:
+            print("\n" + "="*50)
+            print(f"STUDENT DETAILS")
+            print("="*50)
+            print(f"Name: {current.name}")
+            print(f"Admission: {current.admission}")
+            print(f"Marks:")
+            for subject, mark in current.data.items():
+                print(f"  {subject}: {mark}")
+            
+            # Calculate and display average
+            if current.data:
+                average = sum(current.data.values()) / len(current.data)
+                print(f"Average: {average:.2f}")
+            
+            current = current.next
+    
+    def find_student(self, name):
+        """Find a specific student by name"""
+        current = self.head
+        while current:
+            if current.name.lower() == name.lower():
+                return current
+            current = current.next
+        return None
+
+# Main function to create and populate the linked list
+def main():
+    # Create linked list
+    student_list = StudentLinkedList()
+    
+    print("STUDENT MARK RECORDING SYSTEM")
+    print("="*50)
+    
+    # Input data for three students
+    students_info = [
+        ("Moraa", "CIT 211"),
+        ("David", "CIM 107"), 
+        ("Hilda", "CIS 092")
+    ]
+    
+    # Subjects to enter marks for
+    subjects = ["CIR 207", "CIR 209", "CIT 211"]
+    
+    for name, admission in students_info:
+        print(f"\nEntering marks for {name} (Admission: {admission})")
+        print("-" * 30)
+        
+        marks_dict = {}
+        for subject in subjects:
+            while True:
+                try:
+                    mark = float(input(f"Enter mark for {subject}: "))
+                    if 0 <= mark <= 100:
+                        marks_dict[subject] = mark
+                        break
+                    else:
+                        print("Please enter a mark between 0 and 100")
+                except ValueError:
+                    print("Please enter a valid number")
+        
+        # Add student to linked list
+        student_list.add_student(name, admission, marks_dict)
+    
+    # Display all student information
+    print("\n" + "="*60)
+    print("FINAL STUDENT RECORDS")
+    print("="*60)
+    student_list.display_all_students()
+    
+    # Demonstrate searching functionality
+    print("\n" + "="*60)
+    print("SEARCH FUNCTIONALITY DEMONSTRATION")
+    print("="*60)
+    
+    search_name = input("\nEnter a student name to search for (or press Enter to skip): ").strip()
+    if search_name:
+        found_student = student_list.find_student(search_name)
+        if found_student:
+            print(f"\nFound student: {found_student.name}")
+            print(f"Admission: {found_student.admission}")
+            print("Marks:")
+            for subject, mark in found_student.data.items():
+                print(f"  {subject}: {mark}")
+        else:
+            print(f"Student '{search_name}' not found.")
+
+# Run the program
+if __name__ == "__main__":
+    main()
